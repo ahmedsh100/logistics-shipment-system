@@ -12,11 +12,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        // إنشاء مستخدم إداري افتراضي
+        \App\Models\User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('admin123'),
+        ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // تشغيل Seeders للبيانات التجريبية
+        $this->call([
+            CustomerSeeder::class,
+            ShipmentSeeder::class,
+            ShipmentStepSeeder::class,
+            InquirySeeder::class,
+        ]);
     }
 }

@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
+            $table->string('tracking_number')->unique();
+            $table->foreignId('customer_id')->constrained()->onDelete('cascade');
+            $table->enum('status', ['new', 'in_transit', 'delivered', 'delayed'])->default('new');
+            $table->decimal('amount', 10, 2);
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

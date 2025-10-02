@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('shipment_steps', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('shipment_id')->constrained()->onDelete('cascade');
+            $table->string('status');
+            $table->string('location')->nullable();
+            $table->text('description')->nullable();
+            $table->timestamp('step_date')->nullable();
             $table->timestamps();
         });
     }
